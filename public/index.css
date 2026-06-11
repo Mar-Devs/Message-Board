@@ -60,6 +60,6 @@ html {
 
 @media (max-width: 750px) {
   .messages-container {
-    margin: 1rem;
+    margin: 2rem;
   }
 }

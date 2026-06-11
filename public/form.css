@@ -31,12 +31,11 @@ form {
   display: grid;
   grid-template-rows: repeat(1fr, 3);
   gap: 1rem;
-  transform: scale(2);
   align-self: start;
   justify-self: center;
   font-size: 1rem;
-  grid-column: 2/3;
-  /* grid-row: 2/3; */
+  grid-column: 1/4;
+  transform: scale(2);
 }
 label {
   display: flex;
@@ -63,4 +62,11 @@ button:hover {
 
 button:active {
   transform: translateY(10px);
+}
+
+@media (max-width: 750px) {
+  form {
+    transform: scale(1.5);
+    margin: 2rem;
+  }
 }
