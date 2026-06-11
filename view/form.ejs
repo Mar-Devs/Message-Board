@@ -1,0 +1,16 @@
+ <link rel="stylesheet" href="form.css">
+  <link rel="icon" type="image/x-icon" href="message-icon.svg">
+  <title>New Message</title>
+ 
+ <%- include('navBar',{links:links}) %>
+
+<form method="POST" action="/new">
+  <label for="author-name"
+    >Name:
+    <input type="text" name="userName" id="name" />
+  </label>
+  <label for="message"> Message:
+    <input type="text" name="userMessage" id="message" />
+  </label>
+  <button type="submit">SUBMIT</button>
+</form>
