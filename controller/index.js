@@ -17,7 +17,7 @@ async function print() {
   r.forEach((m) => {
     let newDate = m.submission_date;
     newDate = newDate.toString();
-    const formatted = newDate.slice(0,15)
+    const formatted = newDate.slice(0, 15);
     messages.push({
       text: m.message,
       user: m.user_name,
@@ -40,11 +40,8 @@ indexRouter.post("/new", (req, res) => {
   const formattedDate = toDateString.slice(0, 10);
   const arr = [userName, userMessage, formattedDate];
 
-  try {
-    populate(arr);
-  } catch {
-    console.log("Couldn't upload to database :(");
-  }
+  populate(arr);
+
   res.redirect("/");
 });
 
