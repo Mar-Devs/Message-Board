@@ -1,26 +1,32 @@
 const { Router } = require("express");
 const express = require("express");
+const { populate, getData } = require("../db/queries.js");
 
 const indexRouter = Router();
 
 const app = express();
 
-const messages = [
-  {
-    text: "Maybe I don't recognize you sober.",
-    user: "Katniss",
-    added: new Date().toDateString(),
-  },
-  {
-    text: "I'm not a drinker myself.",
-    user: "Haymitch",
-    added: new Date().toDateString(),
-  },
-];
+const messages = [];
 const links = [
   { href: "/", text: "Home" },
   { href: "/new", text: "New Message" },
 ];
+
+async function print() {
+  const r = await getData();
+  r.forEach((m) => {
+    let newDate = m.submission_date;
+    newDate = newDate.toString();
+    const formatted = newDate.slice(0,15)
+    messages.push({
+      text: m.message,
+      user: m.user_name,
+      added: formatted,
+    });
+  });
+}
+
+print();
 
 indexRouter.get("/", (req, res) => {
   res.render("index", { links: links, messages: messages });
@@ -29,11 +35,16 @@ indexRouter.get("/", (req, res) => {
 indexRouter.post("/new", (req, res) => {
   const userMessage = req.body.userMessage;
   const userName = req.body.userName;
-  messages.push({
-    text: userMessage,
-    user: userName,
-    added: new Date().toDateString(),
-  });
+  const date = new Date();
+  const toDateString = date.toISOString();
+  const formattedDate = toDateString.slice(0, 10);
+  const arr = [userName, userMessage, formattedDate];
+
+  try {
+    populate(arr);
+  } catch {
+    console.log("Couldn't upload to database :(");
+  }
   res.redirect("/");
 });
 
