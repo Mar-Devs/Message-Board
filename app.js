@@ -5,7 +5,8 @@ const path = require("node:path");
 const ejs = require("ejs");
 const { text } = require("node:stream/consumers");
 const q = require("./db/queries.js");
-
+const { loadEnvFile } = require("node:process");
+process.loadEnvFile(path.join(__dirname, ".env"));
 const app = express();
 
 app.set("views", path.join(__dirname, "view"));
@@ -19,7 +20,7 @@ app.use("/", indexRouter);
 app.use("/new", newRouter);
 
 
-const port = 8000;
+const port = process.env.port || 8000;
 app.listen(port, (error) => {
   if (error) {
     throw error;
