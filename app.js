@@ -6,8 +6,13 @@ const ejs = require("ejs");
 const { text } = require("node:stream/consumers");
 const q = require("./db/queries.js");
 const { loadEnvFile } = require("node:process");
-process.loadEnvFile(".env")
 const app = express();
+
+try {
+  process.loadEnvFile(".env");
+} catch {
+  console.log("This is production :)");
+}
 
 app.set("views", path.join(__dirname, "view"));
 app.set("view engine", "ejs");
@@ -18,7 +23,6 @@ app.use(express.static(assetsPath));
 app.use(express.urlencoded({ extended: true }));
 app.use("/", indexRouter);
 app.use("/new", newRouter);
-
 
 const port = process.env.PORT || 8000;
 app.listen(port, (error) => {
