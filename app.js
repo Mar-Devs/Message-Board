@@ -6,7 +6,7 @@ const ejs = require("ejs");
 const { text } = require("node:stream/consumers");
 const q = require("./db/queries.js");
 const { loadEnvFile } = require("node:process");
-process.loadEnvFile(path.join(__dirname, ".env"));
+process.loadEnvFile(".env")
 const app = express();
 
 app.set("views", path.join(__dirname, "view"));
