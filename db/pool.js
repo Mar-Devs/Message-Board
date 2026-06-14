@@ -5,7 +5,7 @@ process.loadEnvFile(path.join(__dirname, "..", ".env"));
 
 
 module.exports = new Pool({
-  connectionString: process.env.DATABASE_PUBLIC_URL,
+  connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
   //   host: process.env.PGHOST,
   //   user: process.env.PGUSER,
