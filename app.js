@@ -20,7 +20,7 @@ app.use("/", indexRouter);
 app.use("/new", newRouter);
 
 
-const port = process.env.port || 8000;
+const port = process.env.PORT || 8000;
 app.listen(port, (error) => {
   if (error) {
     throw error;
